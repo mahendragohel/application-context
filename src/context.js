@@ -12,25 +12,26 @@ export const themes = {
 };
 
 const initialState = {
-  theme: themes.dark
+  theme: themes.dark,
+  currentTheme: 'dark'
 };
 
-export const GlobalContext = React.createContext(
-  themes.dark // default value
-);
+export const GlobalContext = React.createContext(initialState);
 
 function reducer(state, action) {
   switch (action.type) {
     case 'LIGHT': {
       return {
         ...state,
-        theme: themes.light
+        theme: themes.light,
+        currentTheme: 'light'
       };
     }
     case 'DARK': {
       return {
         ...state,
-        theme: themes.dark
+        theme: themes.dark,
+        currentTheme: 'dark'
       };
     }
     default: {
@@ -41,11 +42,11 @@ function reducer(state, action) {
 
 function GlobalContextProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const value = { state, dispatch };
   return (
-    <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>
+    <GlobalContext.Provider value={[state, dispatch]}>
+      {children}
+    </GlobalContext.Provider>
   );
 }
 
-
-export { GlobalContextProvider, GlobalContext };
+export { GlobalContextProvider };

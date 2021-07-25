@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ThemedButton from './themed-button';
-import { GlobalContext } from './theme-context';
+import { GlobalContext } from './context';
 
 import './style.css';
 
 export default function App() {
-  const { dispatch } = GlobalContext;
+  const [state, dispatch] = useContext(GlobalContext);
   return (
     <Toolbar
       toggleTheme={() => {
-        dispatch({ type: 'DARK' });
+        dispatch({ type: state.currentTheme === 'dark' ? 'LIGHT' : 'DARK' });
       }}
     />
   );

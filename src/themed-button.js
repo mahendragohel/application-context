@@ -1,20 +1,17 @@
-import React from 'react';
-import { globalState } from './theme-context';
+import React, { useContext } from 'react';
+import { GlobalContext } from './context';
 
-class ThemedButton extends React.Component {
-  render() {
-    let props = this.props;
-    return (
-      <button
-        {...props}
-        style={{
-          backgroundColor: globalState.theme.background,
-          color: globalState.theme.color
-        }}
-      />
-    );
-  }
+function ThemedButton(props) {
+  const [state] = useContext(GlobalContext);
+  return (
+    <button
+      {...props}
+      style={{
+        backgroundColor: state.theme.background,
+        color: state.theme.color
+      }}
+    />
+  );
 }
 
-ThemedButton.contextType = ThemeContext;
 export default ThemedButton;
