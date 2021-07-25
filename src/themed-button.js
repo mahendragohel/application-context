@@ -1,14 +1,16 @@
 import React from 'react';
-import { ThemeContext } from './theme-context';
+import { globalState } from './theme-context';
 
 class ThemedButton extends React.Component {
   render() {
     let props = this.props;
-    let theme = this.context;
     return (
       <button
         {...props}
-        style={{ backgroundColor: theme.background, color: theme.color }}
+        style={{
+          backgroundColor: globalState.theme.background,
+          color: globalState.theme.color
+        }}
       />
     );
   }
